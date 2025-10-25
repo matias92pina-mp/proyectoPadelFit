@@ -399,3 +399,72 @@ footer a{
     padding: 0.75rem 0.5rem;
   }
 }
+
+/* Contenedor del botón Ver más */
+.ver-mas-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Botón Ver más/menos */
+.btn-ver-mas {
+  background: linear-gradient(to right, #F4B8C6, #59C6C3);
+  color: white;
+  font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-ver-mas:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(89, 198, 195, 0.4);
+}
+
+.btn-ver-mas:active {
+  transform: translateY(0);
+}
+
+/* Ícono del botón (flecha) */
+.btn-ver-mas i {
+  transition: transform 0.3s ease;
+}
+
+/* Cuando está expandido, rotar la flecha */
+.btn-ver-mas.expandido i {
+  transform: rotate(180deg);
+}
+
+/* Filas ocultas inicialmente */
+tbody tr.fila-oculta {
+  display: none;
+}
+
+/* ESTA ES LA REGLA CLAVE: 
+   Cuando el tbody tiene la clase 'mostrando-todas', 
+   forzamos a que las filas ocultas se muestren 
+   y aplicamos la animación.
+*/
+tbody.mostrando-todas tr.fila-oculta {
+  display: table-row; /* Hacemos que la fila sea visible */
+  animation: fadeIn 0.4s ease; /* Aplicamos la animación aquí */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
