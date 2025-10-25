@@ -3,8 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Liga Pádel</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/web-app-manifest-192x192.png">
+  <link rel="shortcut icon" href="assets/favicon.ico">
+
+  <!-- META TAGS BÁSICAS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Liga Femenina de Pádel | Fechas, posiciones y contacto.">
+  <meta name="author" content="Matías Piña">
+
+  <!-- OPEN GRAPH (para Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="Padel Fit | Liga Femenina de Pádel">
+  <meta property="og:description" content="Conocé las próximas fechas, posiciones y contacto de la Liga Femenina de Pádel.">
+  <!-- <meta property="og:image" content="https://tusitio.github.io/images/preview.jpg"> -->
+  <meta property="og:url" content="https://tusitio.github.io/"> <!-- EDITAR PARA PUBLICAR -->
+  <meta property="og:type" content="website">
+
+  <!-- TWITTER CARDS (para X/Twitter) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Padel Fit | Liga Femenina de Pádel">
+  <meta name="twitter:description" content="Toda la info sobre la Liga Femenina de Pádel: fechas, posiciones y más.">
+  <!-- <meta name="twitter:image" content="https://tusitio.github.io/images/preview.jpg"> --> <!-- EDITAR PARA PUBLICAR -->
+  
+  <!-- Preconexión a Google Fonts (optimización) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts - Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tu CSS -->
   <link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
   <header>
@@ -14,6 +52,7 @@
         <li><a href="#hero">Inicio</a></li>
         <li><a href="#posiciones">Posiciones</a></li>
         <li><a href="#fechas">Fechas</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -26,7 +65,7 @@
           <span class="titulo-negro">Liga Femenina</span>
           <span class="titulo-rosa">Pádel Fit</span>
         </h2>
-        <p>Únete a nuestra comunidad de jugadoras en Del Viso, Argentina. Un espacio donde la pasión por el pádel se encuentra con la amistad y la competencia.</p>
+        <p>Unite a nuestra comunidad de jugadoras. Un espacio donde la pasión por el pádel se encuentra con la amistad y la competencia.</p>
         <div class="hero-buttons">
           <a href="#contacto" class="btn btn-pink">Contáctanos</a>
           <a href="#posiciones" class="btn btn-teal">Ver Posiciones</a>
@@ -45,7 +84,7 @@
         <thead>
           <tr>
             <th>Pos</th>
-            <th>Equipo</th>
+            <th>Jugadora</th>
             <th>PJ</th>
             <th>PG</th>
             <th>PP</th>
@@ -53,73 +92,40 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Los datos se cargan automáticamente desde Google Sheets -->
           <tr>
-            <td>1</td>
-            <td>Las Campeonas</td>
-            <td>8</td>
-            <td>7</td>
-            <td>1</td>
-            <td>21</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Power Girls</td>
-            <td>8</td>
-            <td>6</td>
-            <td>2</td>
-            <td>18</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Ace Team</td>
-            <td>8</td>
-            <td>5</td>
-            <td>3</td>
-            <td>15</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Net Warriors</td>
-            <td>8</td>
-            <td>4</td>
-            <td>4</td>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Smash Queens</td>
-            <td>8</td>
-            <td>2</td>
-            <td>6</td>
-            <td>6</td>
+            <td colspan="6" style="text-align: center; padding: 2rem;">
+              <i class="fa-solid fa-spinner fa-spin"></i> Cargando posiciones...
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- NUEVO: Botón para ver más posiciones -->
+    <div class="ver-mas-container">
+      <button id="btnVerMas" class="btn-ver-mas" style="display: none;">
+        <span id="textoVerMas">Ver todas las posiciones</span>
+        <i id="iconoVerMas" class="fa-solid fa-chevron-down"></i>
+      </button>
     </div>
   </section>
 
   <section id="fechas">
     <h2>Próximas Fechas</h2>
     <div class="fechas-grid">
-      <div class="fecha-card">
-        <h3>Fecha 9</h3>
-        <p><strong>📅 Fecha:</strong> 15 de Noviembre</p>
-        <p><strong>⏰ Hora:</strong> 18:00 hs</p>
-        <p><strong>📍 Lugar:</strong> Club Central</p>
-      </div>
-      <div class="fecha-card">
-        <h3>Fecha 10</h3>
-        <p><strong>📅 Fecha:</strong> 22 de Noviembre</p>
-        <p><strong>⏰ Hora:</strong> 18:00 hs</p>
-        <p><strong>📍 Lugar:</strong> Polideportivo Norte</p>
-      </div>
-      <div class="fecha-card">
-        <h3>Fecha 11</h3>
-        <p><strong>📅 Fecha:</strong> 29 de Noviembre</p>
-        <p><strong>⏰ Hora:</strong> 18:00 hs</p>
-        <p><strong>📍 Lugar:</strong> Club Central</p>
+      <!-- Los datos se cargan automáticamente desde Google Sheets -->
+      <div class="fecha-card" style="text-align: center;">
+        <i class="fa-solid fa-spinner fa-spin"></i> Cargando fechas...
       </div>
     </div>
+  </section>
+
+  <section id="ubicacion">
+    <h2>Ubicación</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6581.480838718431!2d-58.794897346755754!3d-34.433348165802904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9eef5aa9f7c5%3A0xc6ff05ddd45ab4d0!2sVIXEN%20CLUB%20%7C%20FUTBOL%20PADEL%20FITNESS!5e0!3m2!1ses!2sar!4v1761413628946!5m2!1ses!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
   </section>
 
   <section id="contacto">
@@ -127,18 +133,20 @@
     <p>¿Tenés consultas? ¡Escribinos!</p>
     <div class="contacto-info">
       <div class="contacto-item">
-        <span>📧</span>
-        <span>liga@padelfemenino.com</span>
+        <span><i class="fa-brands fa-instagram"></i></span>
+        <span><a href="https://www.instagram.com/padel_fit/" target="_blank" rel="noopener noreferrer">padel_fit</a></span>
       </div>
       <div class="contacto-item">
-        <span>📱</span>
-        <span>+54 11 1234-5678</span>
+        <span><i class="fa-brands fa-whatsapp"></i></span>
+        <span><a href="https://wa.me/541163576326?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20Liga%20de%20p%C3%A1del" target="_blank" rel="noopener noreferrer">+54 11 1234-5678</a></span>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 Liga Pádel Femenina. Todos los derechos reservados.</p>
+    <p>&copy; 2025 Padel Fit. Todos los derechos reservados.</p>
+    <p>Desarrollado por <a href="https://www.linkedin.com/in/matias-pi%C3%B1a-51b5471aa/" target="_blank" rel="noopener noreferrer">Matías Piña</a>. 
+   Código disponible en <a href="https://github.com/matias92pina-mp/proyectoPadelFit" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
   </footer>
 
   <script src="js/main.js"></script>
