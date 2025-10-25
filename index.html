@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Liga Pádel</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/web-app-manifest-192x192.png">
+  <link rel="shortcut icon" href="assets/favicon.ico">
+
   <!-- META TAGS BÁSICAS -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +29,6 @@
   <meta name="twitter:title" content="Padel Fit | Liga Femenina de Pádel">
   <meta name="twitter:description" content="Toda la info sobre la Liga Femenina de Pádel: fechas, posiciones y más.">
   <!-- <meta name="twitter:image" content="https://tusitio.github.io/images/preview.jpg"> --> <!-- EDITAR PARA PUBLICAR -->
-
-  <title>Liga Pádel</title>
   
   <!-- Preconexión a Google Fonts (optimización) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,68 +92,30 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Los datos se cargan automáticamente desde Google Sheets -->
           <tr>
-            <td>1</td>
-            <td>Martina Marinez</td>
-            <td>8</td>
-            <td>7</td>
-            <td>1</td>
-            <td>21</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Gabriela Gabrieli</td>
-            <td>8</td>
-            <td>6</td>
-            <td>2</td>
-            <td>18</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Gimena Gomez</td>
-            <td>8</td>
-            <td>5</td>
-            <td>3</td>
-            <td>15</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Marta Sanchez</td>
-            <td>8</td>
-            <td>4</td>
-            <td>4</td>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Emilia Perez</td>
-            <td>8</td>
-            <td>2</td>
-            <td>6</td>
-            <td>6</td>
+            <td colspan="6" style="text-align: center; padding: 2rem;">
+              <i class="fa-solid fa-spinner fa-spin"></i> Cargando posiciones...
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- NUEVO: Botón para ver más posiciones -->
+    <div class="ver-mas-container">
+      <button id="btnVerMas" class="btn-ver-mas" style="display: none;">
+        <span id="textoVerMas">Ver todas las posiciones</span>
+        <i id="iconoVerMas" class="fa-solid fa-chevron-down"></i>
+      </button>
     </div>
   </section>
 
   <section id="fechas">
     <h2>Próximas Fechas</h2>
     <div class="fechas-grid">
-      <div class="fecha-card">
-        <h3>Fecha 9</h3>
-        <p><strong><i class="fa-regular fa-calendar-days"></i> Fecha:</strong> 15 de Noviembre</p>
-        <p><strong><i class="fa-regular fa-clock"></i> Hora:</strong> 18:00 hs</p>
-      </div>
-      <div class="fecha-card">
-        <h3>Fecha 10</h3>
-        <p><strong><i class="fa-regular fa-calendar-days"></i> Fecha:</strong> 22 de Noviembre</p>
-        <p><strong><i class="fa-regular fa-clock"></i> Hora:</strong> 18:00 hs</p>
-      </div>
-      <div class="fecha-card">
-        <h3>Fecha 11</h3>
-        <p><strong><i class="fa-regular fa-calendar-days"></i> Fecha:</strong> 29 de Noviembre</p>
-        <p><strong><i class="fa-regular fa-clock"></i> Hora:</strong> 18:00 hs</p>
+      <!-- Los datos se cargan automáticamente desde Google Sheets -->
+      <div class="fecha-card" style="text-align: center;">
+        <i class="fa-solid fa-spinner fa-spin"></i> Cargando fechas...
       </div>
     </div>
   </section>
