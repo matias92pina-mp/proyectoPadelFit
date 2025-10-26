@@ -123,9 +123,9 @@ async function cargarFechas() {
     
     // Verificar que la fila tenga datos Y que no sea el header
     if (cells && cells[0] && cells[0].v && cells[0].v !== 'Numero') {
-      const numero = cells[0] ? cells[0].v : '';
-      const fecha = cells[1] ? cells[1].v : '';
-      const hora = cells[2] ? cells[2].v : '';
+      const numero = cells[0] ? (cells[0].f || cells[0].v) : '';
+      const fecha = cells[1] ? (cells[1].f || cells[1].v) : '';
+      const hora = cells[2] ? (cells[2].f || cells[2].v) : '';
 
       const card = document.createElement('div');
       card.className = 'fecha-card';
