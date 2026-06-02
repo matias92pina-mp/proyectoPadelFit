@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Jugadoras - Liga Pádel Fit</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/web-app-manifest-192x192.png">
+  <link rel="shortcut icon" href="assets/favicon.ico">
+
+  <!-- META TAGS BÁSICAS -->
+  <meta name="description" content="Conoce a las jugadoras de la Liga Femenina de Pádel Fit.">
+  <meta name="author" content="Matías Piña">
+
+  <!-- OPEN GRAPH (para Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="Jugadoras - Liga Femenina de Pádel Fit">
+  <meta property="og:description" content="Conoce a las jugadoras de la Liga Femenina de Pádel Fit.">
+  <meta property="og:image" content="https://matias92pina-mp.github.io/proyectoPadelFit/assets/share_ligaPadel.jpg">
+  <meta property="og:url" content="https://matias92pina-mp.github.io/proyectoPadelFit/jugadoras.html">
+  <meta property="og:type" content="website">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jugadoras - Liga Femenina de Pádel Fit">
+  <meta name="twitter:description" content="Conoce a las jugadoras de la Liga Femenina de Pádel Fit.">
+  <meta name="twitter:image" content="https://matias92pina-mp.github.io/proyectoPadelFit/assets/share_ligaPadel.jpg">
+  
+  <!-- Preconexión a Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts - Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HD8EM8CBYF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HD8EM8CBYF');
+  </script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/jugadoras.css">
+
+</head>
+<body>
+  <!-- HEADER (IDÉNTICO AL INDEX.HTML) -->
+  <header>
+    <nav>
+      <h1> <img id="logo" src="assets/padelfit_negro.png" alt="logo Padel fit"> Liga Femenina</h1>
+      <ul>
+        <li><a href="index.html#hero">Inicio</a></li>
+        <li><a href="index.html#posiciones">Posiciones</a></li>
+        <li><a href="index.html#fechas">Fechas</a></li>
+        <li><a href="index.html#ubicacion">Ubicación</a></li>
+        <li><a href="index.html#inscripciones">¡Inscribite!</a></li>
+        <li><a href="jugadoras.html">Jugadoras</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL DE JUGADORAS -->
+  <section id="jugadoras-principal">
+    <h1>Conoce a nuestras Jugadoras</h1>
+    <p class="subtitle">Las mejores jugadoras de la Liga Femenina de Pádel Fit</p>
+    
+    <!-- Grid de jugadoras -->
+    <div class="jugadoras-grid" id="jugadorasGrid">
+      <!-- Las jugadoras se cargarán aquí dinámicamente -->
+      <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+        <i class="fa-solid fa-spinner fa-spin"></i> Cargando jugadoras...
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE INSCRIPCIONES (IDÉNTICA AL INDEX.HTML) -->
+  <section id="inscripciones">
+    <h2>Inscripciones y contacto</h2>
+    <p>¿Lista para unirte o tenes consultas? ¡Escribinos por WhatsApp!</p>
+    <div class="contacto-info">
+      <div class="contacto-item">
+        <span><i class="fa-brands fa-instagram"></i></span>
+        <span><a href="https://www.instagram.com/padel_fit/" target="_blank" rel="noopener noreferrer">padel_fit</a></span>
+      </div>
+      <div class="contacto-item">
+        <span><i class="fa-brands fa-whatsapp"></i></span>
+        <span><a href="https://wa.me/541163576326?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20Liga%20de%20p%C3%A1del" target="_blank" rel="noopener noreferrer">+54 11 6357-6326</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (IDÉNTICO AL INDEX.HTML) -->
+  <footer>
+    <p>&copy; 2025 Padel Fit. Todos los derechos reservados.</p>
+    <p><a href="privacidad.html" rel="noopener noreferrer">Política de Privacidad</a></p>
+    <p>Desarrollado por <a href="https://www.linkedin.com/in/matias-pi%C3%B1a-51b5471aa/" target="_blank" rel="noopener noreferrer">Matías Piña</a>. 
+   Código disponible en <a href="https://github.com/matias92pina-mp/proyectoPadelFit" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/jugadoras.js"></script>
+</body>
+</html>
