@@ -1,7 +1,14 @@
 // ID de la Google Sheet con info de jugadoras
-// Nota: Usaremos la misma sheet de posiciones pero leeremos más columnas si las hay
-// O podés crear una nueva sheet específica para datos completos de jugadoras
 const SHEET_ID_JUGADORAS = '10YBQi99B5qfk1xAlobfz4jtSWduc9jUqNuy__3gLLFE';
+
+// Nombre de la pestaña específica para jugadoras
+const SHEET_NAME_JUGADORAS = 'Jugadoras';
+
+// Array global para guardar todas las jugadoras
+let todasLasJugadoras = [];
+
+// Variable para guardar la instancia del gráfico
+let graficoRadar = null;
 
 // Función para obtener datos de Google Sheets
 async function obtenerDatosSheet(sheetId, rango) {
@@ -20,88 +27,207 @@ async function obtenerDatosSheet(sheetId, rango) {
   }
 }
 
-// Cargar y mostrar jugadoras
+// Cargar jugadoras desde Google Sheets
 async function cargarJugadoras() {
-  const datos = await obtenerDatosSheet(SHEET_ID_JUGADORAS, 'Sheet1');
+  const datos = await obtenerDatosSheet(SHEET_ID_JUGADORAS, SHEET_NAME_JUGADORAS);
   
   if (!datos) {
     console.error('No se pudieron cargar las jugadoras');
-    mostrarError('No se pudieron cargar las jugadoras');
     return;
   }
 
-  const container = document.getElementById('jugadorasGrid');
-  container.innerHTML = ''; // Limpiar contenido
-
-  let jugadorasCargadas = 0;
+  todasLasJugadoras = []; // Limpiar array
 
   // Procesar todas las filas excepto el header
-  datos.forEach((row, index) => {
+  datos.forEach((row, rowIndex) => {
     const cells = row.c;
     
     // Verificar que la fila tenga datos Y que no sea el header
-    if (cells && cells[0] && cells[0].v && cells[0].v !== 'Pos') {
-      jugadorasCargadas++;
-      
+    if (cells && cells[0] && cells[0].v && cells[0].v !== 'Nombre') {
       // Extraer datos de la jugadora
-      const posicion = cells[0] ? cells[0].v : '';
-      const nombre = cells[1] ? cells[1].v : '';
-      const pj = cells[2] ? cells[2].v : '0';     // Partidos jugados
-      const pg = cells[3] ? cells[3].v : '0';     // Partidos ganados
-      const puntos = cells[5] ? cells[5].v : '0'; // Puntos
+      const nombre = cells[0] ? cells[0].v : '';
+      const volea = parseFloat(cells[1] ? (cells[1].v || 0) : 0);
+      const remate = parseFloat(cells[2] ? (cells[2].v || 0) : 0);
+      const bandeja = parseFloat(cells[3] ? (cells[3].v || 0) : 0);
+      const derecha = parseFloat(cells[4] ? (cells[4].v || 0) : 0);
+      const reves = parseFloat(cells[5] ? (cells[5].v || 0) : 0);
+      const globo = parseFloat(cells[6] ? (cells[6].v || 0) : 0);
 
-      // Crear tarjeta de jugadora
-      const card = document.createElement('div');
-      card.className = 'jugadora-card';
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      
-      card.innerHTML = `
-        <div class="jugadora-image">
-          <i class="fa-solid fa-user-circle"></i>
-        </div>
-        <div class="jugadora-info">
-          <div class="jugadora-nombre">${nombre}</div>
-          <div class="jugadora-posicion">Posición #${posicion}</div>
-          <div class="jugadora-stats">
-            <div class="stat">
-              <span class="stat-valor">${pg}</span>
-              <span class="stat-label">Ganados</span>
-            </div>
-            <div class="stat">
-              <span class="stat-valor">${pj}</span>
-              <span class="stat-label">Jugados</span>
-            </div>
-            <div class="stat">
-              <span class="stat-valor">${puntos}</span>
-              <span class="stat-label">Puntos</span>
-            </div>
-          </div>
-        </div>
-      `;
-      
-      container.appendChild(card);
-      
-      // Trigger animación
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, index * 100); // Efecto cascada
+      // DEBUG: Imprimir los datos de cada jugadora
+      console.log(`Jugadora ${rowIndex}: ${nombre}`, { volea, remate, bandeja, derecha, reves, globo });
+
+      // Agregar jugadora al array
+      todasLasJugadoras.push({
+        nombre,
+        volea,
+        remate,
+        bandeja,
+        derecha,
+        reves,
+        globo
+      });
     }
   });
 
-  console.log(`✅ ${jugadorasCargadas} jugadoras cargadas correctamente`);
+  console.log(`✅ ${todasLasJugadoras.length} jugadoras cargadas correctamente`);
+  
+  // Llenar el dropdown con las jugadoras
+  llenarDropdown();
 }
 
-// Mostrar error si algo falla
-function mostrarError(mensaje) {
-  const container = document.getElementById('jugadorasGrid');
-  container.innerHTML = `
-    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #d32f2f;">
-      <i class="fa-solid fa-exclamation-triangle"></i> ${mensaje}
-    </div>
-  `;
+// Llenar el dropdown con las jugadoras
+function llenarDropdown() {
+  const selector = document.getElementById('selectorJugadora');
+  
+  // Limpiar opciones previas (excepto la primera)
+  while (selector.options.length > 1) {
+    selector.remove(1);
+  }
+
+  // Agregar cada jugadora como opción
+  todasLasJugadoras.forEach((jugadora, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = jugadora.nombre;
+    selector.appendChild(option);
+  });
+
+  console.log('✅ Dropdown llenado con jugadoras');
+}
+
+// Mostrar gráfico radar de la jugadora seleccionada
+function mostrarGrafico(indexJugadora) {
+  if (indexJugadora === '') {
+    // Si no hay selección, mostrar mensaje inicial
+    document.getElementById('jugadoraInfo').style.display = 'none';
+    document.getElementById('mensajeInicial').style.display = 'block';
+    return;
+  }
+
+  // Obtener datos de la jugadora seleccionada
+  const jugadora = todasLasJugadoras[indexJugadora];
+
+  // Mostrar información de la jugadora
+  document.getElementById('nombreJugadora').textContent = jugadora.nombre;
+  document.getElementById('jugadoraInfo').style.display = 'block';
+  document.getElementById('mensajeInicial').style.display = 'none';
+
+  // Datos para el gráfico
+  const series = [{
+    name: jugadora.nombre,
+    data: [jugadora.volea, jugadora.remate, jugadora.bandeja, jugadora.derecha, jugadora.reves, jugadora.globo]
+  }];
+
+  // Crear categorías con valores
+  const categorias = [
+    `Volea ${jugadora.volea}`,
+    `Remate ${jugadora.remate}`,
+    `Bandeja ${jugadora.bandeja}`,
+    `Derecha ${jugadora.derecha}`,
+    `Revés ${jugadora.reves}`,
+    `Globo ${jugadora.globo}`
+  ];
+
+  const options = {
+    chart: {
+      type: 'radar',
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false
+        }
+      }
+    },
+    title: {
+      text: '',
+      align: 'left'
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ['#59C6C3'],
+      dashArray: 0
+    },
+    fill: {
+      opacity: 0.4,
+      colors: ['#F4B8C6']
+    },
+    markers: {
+      size: 5,
+      colors: ['#59C6C3'],
+      strokeColor: '#fff',
+      strokeWidth: 2
+    },
+    xaxis: {
+      categories: categorias,
+      labels: {
+        style: {
+          fontSize: '12px',
+          fontFamily: 'Montserrat',
+          colors: ['#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E']
+        }
+      }
+    },
+    yaxis: {
+      min: 0,
+      max: 10,
+      tickAmount: 0,
+      labels: {
+        show: false
+      }
+    },
+    plotOptions: {
+      radar: {
+        size: 100,
+        polygons: {
+          strokeColor: '#e9e9e9',
+          fill: {
+            colors: ['#f8f8f8', '#fff']
+          }
+        }
+      }
+    },
+    colors: ['#59C6C3'],
+    legend: {
+      show: true,
+      floating: false,
+      position: 'bottom',
+      horizontalAlign: 'center',
+      fontSize: '14px',
+      fontFamily: 'Montserrat',
+      labels: {
+        colors: '#2E2E2E'
+      }
+    }
+  };
+
+  // Destruir gráfico anterior si existe
+  if (graficoRadar) {
+    graficoRadar.destroy();
+  }
+
+  // Crear nuevo gráfico
+  graficoRadar = new ApexCharts(document.getElementById('graficoRadar'), {
+    series: series,
+    ...options
+  });
+
+  graficoRadar.render();
+  console.log(`✅ Gráfico de ${jugadora.nombre} mostrado`);
+}
+
+// Event listener para el dropdown
+function configurarSelectorJugadora() {
+  const selector = document.getElementById('selectorJugadora');
+  selector.addEventListener('change', (e) => {
+    mostrarGrafico(e.target.value);
+  });
 }
 
 // Ejecutar cuando la página cargue
@@ -111,18 +237,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Cargar jugadoras desde Google Sheets
   await cargarJugadoras();
   
-  // Smooth scroll para links de navegación
-  const navLinks = document.querySelectorAll('a[href^="index.html#"]');
-  
-  navLinks.forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href').split('#')[1];
-      // Como estamos en otra página, redirigimos a index.html
-      window.location.href = 'index.html#' + targetId;
-    });
-  });
+  // Configurar el selector
+  configurarSelectorJugadora();
 
   console.log('✅ Página de Jugadoras lista');
 });

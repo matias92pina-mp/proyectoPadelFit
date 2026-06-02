@@ -38,6 +38,9 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- ApexCharts (para gráficos radar) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.48.0/apexcharts.min.js"></script>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HD8EM8CBYF"></script>
   <script>
@@ -71,14 +74,29 @@
   <!-- SECCIÓN PRINCIPAL DE JUGADORAS -->
   <section id="jugadoras-principal">
     <h1>Conoce a nuestras Jugadoras</h1>
-    <p class="subtitle">Las mejores jugadoras de la Liga Femenina de Pádel Fit</p>
+    <p class="subtitle">Selecciona una jugadora para ver su perfil de habilidades</p>
     
-    <!-- Grid de jugadoras -->
-    <div class="jugadoras-grid" id="jugadorasGrid">
-      <!-- Las jugadoras se cargarán aquí dinámicamente -->
-      <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-        <i class="fa-solid fa-spinner fa-spin"></i> Cargando jugadoras...
+    <!-- Dropdown de jugadoras -->
+    <div class="dropdown-container">
+      <select id="selectorJugadora" class="selector-jugadora">
+        <option value="">-- Selecciona una jugadora --</option>
+      </select>
+    </div>
+
+    <!-- Información de la jugadora seleccionada -->
+    <div id="jugadoraInfo" class="jugadora-info-container">
+      <h2 id="nombreJugadora" class="nombre-jugadora"></h2>
+      
+      <!-- Gráfico radar -->
+      <div id="chartContainer" class="chart-container">
+        <div id="graficoRadar"></div>
       </div>
+    </div>
+
+    <!-- Mensaje inicial -->
+    <div id="mensajeInicial" class="mensaje-inicial" style="display: block;">
+      <i class="fa-solid fa-arrow-up"></i>
+      <p>Selecciona una jugadora para ver sus habilidades</p>
     </div>
   </section>
 
