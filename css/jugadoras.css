@@ -1,0 +1,244 @@
+/* Estilos específicos para la página de Jugadoras */
+
+/* Sección principal de jugadoras */
+#jugadoras-principal {
+  min-height: 60vh;
+}
+
+#jugadoras-principal h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2E2E2E;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#jugadoras-principal .subtitle {
+  font-size: 1.125rem;
+  color: #2E2E2E;
+  opacity: 0.7;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Dropdown de selección */
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selector-jugadora {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid #59C6C3;
+  border-radius: 2rem;
+  background-color: white;
+  color: #2E2E2E;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.selector-jugadora:hover {
+  border-color: #F4B8C6;
+  box-shadow: 0 4px 12px rgba(244, 184, 198, 0.2);
+}
+
+.selector-jugadora:focus {
+  outline: none;
+  border-color: #F4B8C6;
+  box-shadow: 0 4px 12px rgba(244, 184, 198, 0.3);
+}
+
+.selector-jugadora option {
+  padding: 0.75rem;
+  color: #2E2E2E;
+}
+
+/* Contenedor de información de la jugadora */
+.jugadora-info-container {
+  animation: fadeIn 0.5s ease;
+}
+
+.nombre-jugadora {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2E2E2E;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor del gráfico */
+.chart-container {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+  overflow: visible;
+  width: 100%;
+}
+
+#graficoRadar {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mensaje inicial */
+.mensaje-inicial {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #2E2E2E;
+  opacity: 0.6;
+  animation: fadeIn 0.5s ease;
+}
+
+.mensaje-inicial i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  color: #59C6C3;
+}
+
+.mensaje-inicial p {
+  font-size: 1.125rem;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para ApexCharts */
+.apexcharts-legend {
+  margin-top: 1rem !important;
+}
+
+.apexcharts-tooltip {
+  background-color: #2E2E2E !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid #59C6C3 !important;
+}
+
+.apexcharts-tooltip-title {
+  background-color: #F4B8C6 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.apexcharts-tooltip-series-group {
+  padding: 0.75rem !important;
+}
+
+/* Ocultar etiquetas del eje Y (10 y 0) */
+.apexcharts-yaxis {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #jugadoras-principal h1 {
+    font-size: 2rem;
+  }
+
+  #jugadoras-principal .subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .selector-jugadora {
+    font-size: 0.95rem;
+    padding: 0.875rem;
+  }
+
+  .nombre-jugadora {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-container {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  #graficoRadar {
+    min-height: 350px;
+  }
+
+  .mensaje-inicial i {
+    font-size: 2rem;
+  }
+
+  .mensaje-inicial p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #jugadoras-principal h1 {
+    font-size: 1.5rem;
+  }
+
+  #jugadoras-principal .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .dropdown-container {
+    max-width: 100%;
+  }
+
+  .selector-jugadora {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .nombre-jugadora {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .chart-container {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #graficoRadar {
+    min-height: 280px;
+  }
+}
+
+/* Ficha técnica de datos esenciales */
+.datos-esenciales-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #666666;
+}
+
+.datos-esenciales-container strong {
+  color: #2E2E2E;
+}
+
+/* Ocultar contenedor completo del eje Y */
+.apexcharts-yaxis {
+  display: none !important;
+}

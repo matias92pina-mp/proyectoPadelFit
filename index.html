@@ -1,57 +1,49 @@
+
+code
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Liga Pádel</title>
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon.ico">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/web-app-manifest-192x192.png">
   <link rel="shortcut icon" href="assets/favicon.ico">
-
   <!-- META TAGS BÁSICAS -->
   <meta name="description" content="Liga Femenina de Pádel | Fechas, posiciones y contacto.">
   <meta name="author" content="Matías Piña">
-
   <!-- OPEN GRAPH (para Facebook, LinkedIn, WhatsApp) -->
   <meta property="og:title" content="Padel Fit | Liga Femenina de Pádel">
   <meta property="og:description" content="Conocé las próximas fechas, posiciones y contacto de la Liga Femenina de Pádel.">
   <meta property="og:image" content="https://matias92pina-mp.github.io/proyectoPadelFit/assets/share_ligaPadel.jpg">
   <meta property="og:url" content="https://matias92pina-mp.github.io/proyectoPadelFit">
   <meta property="og:type" content="website">
-
   <!-- TWITTER CARDS (para X/Twitter) -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Padel Fit | Liga Femenina de Pádel">
   <meta name="twitter:description" content="Toda la info sobre la Liga Femenina de Pádel: fechas, posiciones y más.">
   <meta name="twitter:image" content="https://matias92pina-mp.github.io/proyectoPadelFit/assets/share_ligaPadel.jpg">
-  
   <!-- Preconexión a Google Fonts (optimización) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <!-- Google Fonts - Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HD8EM8CBYF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-HD8EM8CBYF');
   </script>
-
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
-
 </head>
+
 <body>
   <header>
     <nav>
@@ -62,10 +54,10 @@
         <li><a href="#fechas">Fechas</a></li>
         <li><a href="#ubicacion">Ubicación</a></li>
         <li><a href="#inscripciones">¡Inscribite!</a></li>
+        <li><a href="jugadoras.html">Jugadoras</a></li>
       </ul>
     </nav>
   </header>
-
   <section id="hero">
     <div class="hero-container">
       <div class="hero-content">
@@ -84,7 +76,6 @@
       </div>
     </div>
   </section>
-
   <section id="posiciones">
     <h2>Tabla de Posiciones</h2>
     <div class="tabla-posiciones">
@@ -109,7 +100,7 @@
         </tbody>
       </table>
     </div>
-    <!-- NUEVO: Botón para ver más posiciones -->
+    <!-- Botón para ver más posiciones -->
     <div class="ver-mas-container">
       <button id="btnVerMas" class="btn-ver-mas" style="display: none;">
         <span id="textoVerMas">Ver todas las posiciones</span>
@@ -117,7 +108,6 @@
       </button>
     </div>
   </section>
-
   <section id="fechas">
     <h2>Próximas Fechas</h2>
     <div class="fechas-grid">
@@ -127,15 +117,12 @@
       </div>
     </div>
   </section>
-
   <section id="ubicacion">
     <h2>Ubicación</h2>
     <div class="map-container">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6581.480838718431!2d-58.794897346755754!3d-34.433348165802904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9eef5aa9f7c5%3A0xc6ff05ddd45ab4d0!2sVIXEN%20CLUB%20%7C%20FUTBOL%20PADEL%20FITNESS!5e0!3m2!1ses!2sar!4v1761413628946!5m2!1ses!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-
   </section>
-
   <section id="inscripciones">
     <h2>Inscripciones y contacto</h2>
     <p>¿Lista para unirte o tenes consultas? ¡Escribinos por WhatsApp!</p>
@@ -150,15 +137,12 @@
       </div>
     </div>
   </section>
-
   <footer>
     <p>&copy; 2025 Padel Fit. Todos los derechos reservados.</p>
     <p><a href="privacidad.html" rel="noopener noreferrer">Política de Privacidad</a></p>
     <p>Desarrollado por <a href="https://www.linkedin.com/in/matias-pi%C3%B1a-51b5471aa/" target="_blank" rel="noopener noreferrer">Matías Piña</a>. 
    Código disponible en <a href="https://github.com/matias92pina-mp/proyectoPadelFit" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
   </footer>
-
-  
   <script src="js/main.js"></script>
 </body>
 </html>
