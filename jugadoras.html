@@ -75,7 +75,7 @@
   <section id="jugadoras-principal">
     <h1>Conoce a nuestras Jugadoras</h1>
     <p class="subtitle">Selecciona una jugadora para ver su perfil de habilidades</p>
-    
+
     <!-- Dropdown de jugadoras -->
     <div class="dropdown-container">
       <select id="selectorJugadora" class="selector-jugadora">
@@ -83,21 +83,29 @@
       </select>
     </div>
 
-    <!-- Información de la jugadora seleccionada -->
-    <div id="jugadoraInfo" class="jugadora-info-container">
+    <!-- Mensaje inicial -->
+    <div id="mensajeInicial" class="mensaje-inicial" style="display: block;">
+      <i class="fa-solid fa-arrow-up"></i>
+      <p>Selecciona una jugadora para ver sus habilidades</p>
+    </div>
+
+    <!-- LO NUEVOO VER SI ES NECESARIO SACARLO -->
+    <div id="jugadoraInfo" class="jugadora-info-container" style="display: none;">
       <h2 id="nombreJugadora" class="nombre-jugadora"></h2>
+      
+      <div id="datosEsenciales" class="datos-esenciales-container"></div>
+      
+      <div class="chart-container">
+        <div id="graficoRadar"></div>
+      </div>
+    </div>
       
       <!-- Gráfico radar -->
       <div id="chartContainer" class="chart-container">
         <div id="graficoRadar"></div>
       </div>
     </div>
-
-    <!-- Mensaje inicial -->
-    <div id="mensajeInicial" class="mensaje-inicial" style="display: block;">
-      <i class="fa-solid fa-arrow-up"></i>
-      <p>Selecciona una jugadora para ver sus habilidades</p>
-    </div>
+    
   </section>
 
   <!-- SECCIÓN DE INSCRIPCIONES (IDÉNTICA AL INDEX.HTML) -->

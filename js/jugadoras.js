@@ -38,13 +38,10 @@ async function cargarJugadoras() {
 
   todasLasJugadoras = []; // Limpiar array
 
-  // Procesar todas las filas excepto el header
   datos.forEach((row, rowIndex) => {
     const cells = row.c;
     
-    // Verificar que la fila tenga datos Y que no sea el header
     if (cells && cells[0] && cells[0].v && cells[0].v !== 'Nombre') {
-      // Extraer datos de la jugadora
       const nombre = cells[0] ? cells[0].v : '';
       const volea = parseFloat(cells[1] ? (cells[1].v || 0) : 0);
       const remate = parseFloat(cells[2] ? (cells[2].v || 0) : 0);
@@ -53,25 +50,22 @@ async function cargarJugadoras() {
       const reves = parseFloat(cells[5] ? (cells[5].v || 0) : 0);
       const globo = parseFloat(cells[6] ? (cells[6].v || 0) : 0);
 
-      // DEBUG: Imprimir los datos de cada jugadora
-      console.log(`Jugadora ${rowIndex}: ${nombre}`, { volea, remate, bandeja, derecha, reves, globo });
+      // NUEVOS DATOS (Columnas H, I, J en base 0 -> Índices 7, 8, 9)
+      const posicionCancha = cells[7] ? cells[7].v : 'No definida';
+      const manoHabil = cells[8] ? cells[8].v : 'No definida';
+      const puestoTabla = cells[9] ? cells[9].v : '-';
 
-      // Agregar jugadora al array
       todasLasJugadoras.push({
         nombre,
-        volea,
-        remate,
-        bandeja,
-        derecha,
-        reves,
-        globo
+        volea, remate, bandeja, derecha, reves, globo,
+        posicionCancha,
+        manoHabil,
+        puestoTabla
       });
     }
   });
 
   console.log(`✅ ${todasLasJugadoras.length} jugadoras cargadas correctamente`);
-  
-  // Llenar el dropdown con las jugadoras
   llenarDropdown();
 }
 
@@ -98,39 +92,53 @@ function llenarDropdown() {
 // Mostrar gráfico radar de la jugadora seleccionada
 function mostrarGrafico(indexJugadora) {
   if (indexJugadora === '') {
-    // Si no hay selección, mostrar mensaje inicial
     document.getElementById('jugadoraInfo').style.display = 'none';
     document.getElementById('mensajeInicial').style.display = 'block';
     return;
   }
 
-  // Obtener datos de la jugadora seleccionada
+  const contenedorInfo = document.getElementById('jugadoraInfo');
+  
+  if (indexJugadora === '') {
+    // Esto oculta el bloque entero, eliminando el margen y el espacio en blanco
+    contenedorInfo.style.display = 'none'; 
+    document.getElementById('mensajeInicial').style.display = 'block';
+    return;
+  }
+
   const jugadora = todasLasJugadoras[indexJugadora];
 
-  // Mostrar información de la jugadora
-  document.getElementById('nombreJugadora').textContent = jugadora.nombre;
+  // 1. Inyectar datos en los elementos HTML (Nombre con #Puesto y Ficha Esencial)
+  document.getElementById('nombreJugadora').textContent = `${jugadora.nombre} #${jugadora.puestoTabla}`;
+  
+  document.getElementById('datosEsenciales').innerHTML = `
+    <span><strong>Lado:</strong> ${jugadora.posicionCancha}</span>
+    <span><strong>Mano:</strong> ${jugadora.manoHabil}</span>
+  `;
+
   document.getElementById('jugadoraInfo').style.display = 'block';
   document.getElementById('mensajeInicial').style.display = 'none';
 
-  // Datos para el gráfico
+  // 2. Configurar categorías en dos líneas para UX óptima
+  const categorias = [
+    ['Volea', jugadora.volea],
+    ['Remate', jugadora.remate],
+    ['Bandeja', jugadora.bandeja],
+    ['Derecha', jugadora.derecha],
+    ['Revés', jugadora.reves],
+    ['Globo', jugadora.globo]
+  ];
+
   const series = [{
     name: jugadora.nombre,
     data: [jugadora.volea, jugadora.remate, jugadora.bandeja, jugadora.derecha, jugadora.reves, jugadora.globo]
   }];
 
-  // Crear categorías con valores
-  const categorias = [
-    `Volea ${jugadora.volea}`,
-    `Remate ${jugadora.remate}`,
-    `Bandeja ${jugadora.bandeja}`,
-    `Derecha ${jugadora.derecha}`,
-    `Revés ${jugadora.reves}`,
-    `Globo ${jugadora.globo}`
-  ];
-
+  // 3. Opciones completas del gráfico
   const options = {
     chart: {
       type: 'radar',
+      fontFamily: "'Montserrat', sans-serif", // Soluciona error tipográfico en descargas PNG
       toolbar: {
         show: true,
         tools: {
@@ -144,47 +152,29 @@ function mostrarGrafico(indexJugadora) {
         }
       }
     },
-    title: {
-      text: '',
-      align: 'left'
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['#59C6C3'],
-      dashArray: 0
-    },
-    fill: {
-      opacity: 0.4,
-      colors: ['#F4B8C6']
-    },
-    markers: {
-      size: 5,
-      colors: ['#59C6C3'],
-      strokeColor: '#fff',
-      strokeWidth: 2
-    },
     xaxis: {
       categories: categorias,
       labels: {
         style: {
-          fontSize: '12px',
+          fontSize: '15px',   // Fuente más grande para las habilidades
+          fontWeight: 600,    // Un poco más de peso visual
           fontFamily: 'Montserrat',
           colors: ['#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E', '#2E2E2E']
         }
       }
     },
     yaxis: {
+      show: false,
       min: 0,
       max: 10,
-      tickAmount: 0,
       labels: {
-        show: false
+        show: false,
+        formatter: function() { return ""; }
       }
     },
     plotOptions: {
       radar: {
-        size: 100,
+        // Quitamos "size: 100" para que se vuelva responsivo al 100%
         polygons: {
           strokeColor: '#e9e9e9',
           fill: {
@@ -194,25 +184,25 @@ function mostrarGrafico(indexJugadora) {
       }
     },
     colors: ['#59C6C3'],
+    tooltip: {
+      enabled: false // Desactivado para eliminar ruido visual redundante
+    },
+    
+    markers: {
+      size: 5,            // Tamaño de los puntitos en cada vértice
+      colors: ['#59C6C3'], // Color del centro del punto
+      strokeColors: '#ffffff', // Borde blanco para que resalten
+      strokeWidth: 2
+    },
     legend: {
-      show: true,
-      floating: false,
-      position: 'bottom',
-      horizontalAlign: 'center',
-      fontSize: '14px',
-      fontFamily: 'Montserrat',
-      labels: {
-        colors: '#2E2E2E'
-      }
+      show: false // Ocultado ya que el título ahora tiene el nombre y ranking
     }
   };
 
-  // Destruir gráfico anterior si existe
   if (graficoRadar) {
     graficoRadar.destroy();
   }
 
-  // Crear nuevo gráfico
   graficoRadar = new ApexCharts(document.getElementById('graficoRadar'), {
     series: series,
     ...options
@@ -220,6 +210,8 @@ function mostrarGrafico(indexJugadora) {
 
   graficoRadar.render();
   console.log(`✅ Gráfico de ${jugadora.nombre} mostrado`);
+
+  
 }
 
 // Event listener para el dropdown
