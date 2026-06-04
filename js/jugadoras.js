@@ -43,21 +43,21 @@ async function cargarJugadoras() {
     
     if (cells && cells[0] && cells[0].v && cells[0].v !== 'Nombre') {
       const nombre = cells[0] ? cells[0].v : '';
-      const volea = parseFloat(cells[1] ? (cells[1].v || 0) : 0);
-      const remate = parseFloat(cells[2] ? (cells[2].v || 0) : 0);
+      const ataque = parseFloat(cells[1] ? (cells[1].v || 0) : 0);
+      const defensa = parseFloat(cells[2] ? (cells[2].v || 0) : 0);
       const bandeja = parseFloat(cells[3] ? (cells[3].v || 0) : 0);
-      const derecha = parseFloat(cells[4] ? (cells[4].v || 0) : 0);
-      const reves = parseFloat(cells[5] ? (cells[5].v || 0) : 0);
-      const globo = parseFloat(cells[6] ? (cells[6].v || 0) : 0);
+      const saque = parseFloat(cells[4] ? (cells[4].v || 0) : 0);
+      const macrojuego = parseFloat(cells[5] ? (cells[5].v || 0) : 0);
+      // const globo = parseFloat(cells[6] ? (cells[6].v || 0) : 0);
 
       // NUEVOS DATOS (Columnas H, I, J en base 0 -> Índices 7, 8, 9)
-      const posicionCancha = cells[7] ? cells[7].v : 'No definida';
-      const manoHabil = cells[8] ? cells[8].v : 'No definida';
-      const puestoTabla = cells[9] ? cells[9].v : '-';
+      const posicionCancha = cells[6] ? cells[6].v : 'No definida';
+      const manoHabil = cells[7] ? cells[7].v : 'No definida';
+      const puestoTabla = cells[8] ? cells[8].v : '-';
 
       todasLasJugadoras.push({
         nombre,
-        volea, remate, bandeja, derecha, reves, globo,
+        ataque, defensa, bandeja, saque, macrojuego,
         posicionCancha,
         manoHabil,
         puestoTabla
@@ -121,17 +121,17 @@ function mostrarGrafico(indexJugadora) {
 
   // 2. Configurar categorías en dos líneas para UX óptima
   const categorias = [
-    ['Volea', jugadora.volea],
-    ['Remate', jugadora.remate],
+    ['Ataque', jugadora.ataque],
+    ['Defensa', jugadora.defensa],
     ['Bandeja', jugadora.bandeja],
-    ['Derecha', jugadora.derecha],
-    ['Revés', jugadora.reves],
-    ['Globo', jugadora.globo]
+    ['Saque', jugadora.saque],
+    ['Macro-juego', jugadora.macrojuego]
+    //['Globo', jugadora.globo]
   ];
 
   const series = [{
     name: jugadora.nombre,
-    data: [jugadora.volea, jugadora.remate, jugadora.bandeja, jugadora.derecha, jugadora.reves, jugadora.globo]
+    data: [jugadora.ataque, jugadora.defensa, jugadora.bandeja, jugadora.saque, jugadora.macrojuego] //jugadora.globo]
   }];
 
   // 3. Opciones completas del gráfico
@@ -171,6 +171,10 @@ function mostrarGrafico(indexJugadora) {
         show: false,
         formatter: function() { return ""; }
       }
+    },
+    fill: {
+      opacity: 0.5,
+      colors: ['#F4B8C6']
     },
     plotOptions: {
       radar: {
